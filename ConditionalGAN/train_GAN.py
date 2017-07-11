@@ -34,7 +34,7 @@ def main():
                         help='Interval of snapshot')
     parser.add_argument('--display_interval', type=int, default=100,
                         help='Interval of displaying log to console')
-    parser.add_argument('--visualize_interval', type=int, default=100,
+    parser.add_argument('--visualize_interval', type=int, default=1000,
                         help='Interval of visualizing')
     args = parser.parse_args()
 
