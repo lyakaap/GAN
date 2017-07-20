@@ -23,8 +23,8 @@ class Generator(chainer.Chain):
         )
     
     def make_hidden(self, batchsize):
-        return numpy.random.normal(0, 1, (batchsize, 100, 1, 1))\
-            .astype(numpy.float32)
+        return (numpy.random.normal(0, 1, (batchsize, 100, 1, 1)) / 10) \
+    .astype(numpy.float32) # normalize by sqrt(d)
        
     def __call__(self, z):
         h = F.reshape(F.relu(self.bn0(self.l0z(z))), (z.data.shape[0], 128, 7, 7))

@@ -8,9 +8,8 @@ import chainer
 from chainer import training
 from chainer.training import extensions
 
-from MNIST_net import Discriminator
-from MNIST_net import Generator
-from updater_LSGAN import DCGANUpdater
+from GLO_Generator import Generator
+from updater import GLOUpdater
 from visualize import out_generated_image
 
 
@@ -45,14 +44,12 @@ def main():
     print('')
 
     # Set up a neural network to train
-    gen = Generator()
-    dis = Discriminator()
+    gen = Generator().make_hidden(args.batchsize)
 
     if args.gpu >= 0:
         # Make a specified GPU current
         chainer.cuda.get_device_from_id(args.gpu).use()
         gen.to_gpu()  # Copy the model to the GPU
-        dis.to_gpu()
 
     # Setup an optimizer
     def make_optimizer(model, alpha=0.0002, beta1=0.5):
@@ -65,6 +62,7 @@ def main():
 
     # Load the MNIST dataset
     train, _ = chainer.datasets.get_mnist(withlabel=False, ndim=3, scale=255.) # ndim=3 : (ch,width,height)
+    
     train_iter = chainer.iterators.SerialIterator(train, args.batchsize)
     
     # Set up a trainer

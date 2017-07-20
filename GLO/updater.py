@@ -8,12 +8,12 @@ import chainer.functions as F
 from chainer import Variable
 
 
-class DCGANUpdater(chainer.training.StandardUpdater):
+class GLOUpdater(chainer.training.StandardUpdater):
 
     def __init__(self, *args, **kwargs):
         self.gen, self.dis = kwargs.pop('models')
         self.a, self.b, self.c = 0, 1, 1
-        super(DCGANUpdater, self).__init__(*args, **kwargs)
+        super(GLOUpdater, self).__init__(*args, **kwargs)
 
     def loss_dis(self, dis, y_fake, y_real):
         batchsize = len(y_fake)
