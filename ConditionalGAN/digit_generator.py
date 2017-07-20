@@ -11,7 +11,7 @@ from MNIST_net import Generator
 
 
 parser = argparse.ArgumentParser(description='DigitGenerator')
-parser.add_argument('--digits', '-d', default='123',
+parser.add_argument('--digits', '-d', default='20170710',
                     help='Input some digits you want to generate')
 args = parser.parse_args()
 
